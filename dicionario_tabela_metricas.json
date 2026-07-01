@@ -1,0 +1,75 @@
+{
+  "colunas": {
+    "dataset": "Dataset",
+    "modelo": "Modelo",
+    "mitigacao": "Mitigação",
+    "config_sensivel": "Config.",
+    "accuracy": "Acc.",
+    "precision": "Prec.",
+    "recall": "Rec.",
+    "f1": "F1",
+    "equal_opportunity": "EOp",
+    "equalized_odds": "EOdds",
+    "demographic_parity": "DP",
+    "tpr_privilegiado": "TPR|P=1",
+    "tpr_desprivilegiado": "TPR|P=0",
+    "fpr_privilegiado": "FPR|P=1",
+    "fpr_desprivilegiado": "FPR|P=0",
+    "positive_rate_privilegiado": "PR|P=1",
+    "positive_rate_desprivilegiado": "PR|P=0",
+    "actual_rate_privilegiado": "AR|P=1",
+    "actual_rate_desprivilegiado": "AR|P=0"
+
+  },
+  "modelos": {
+    "nulo": "Nulo",
+    "base": "Base",
+    "fairshap": "FairShap",
+    "fagtb": "FAGTB",
+    "threshold": "Threshold"
+  },
+  "mitigacoes": {
+    "nenhuma": "Nenhuma",
+    "fairshap": "FairShap",
+    "fagtb": "FAGTB",
+    "threshold": "Threshold"
+  },
+  "configs_sensiveis": {
+    "african_american_0": "Preto|P=0",
+    "caucasian_1": "Branco|P=1"
+  },
+  "datasets": {
+    "compas": "COMPAS",
+    "hmda": "HMDA"
+  },
+  "ordem_modelos": {
+    "nulo": 0,
+    "base": 1,
+    "fairshap": 2,
+    "fagtb": 3,
+    "threshold": 4
+  },
+  "metricas_maior_melhor": [
+    "accuracy",
+    "precision",
+    "recall",
+    "f1"
+  ],
+  "metricas_menor_melhor": [
+    "equal_opportunity",
+    "equalized_odds",
+    "demographic_parity"
+  ],
+  "metricas_descritivas": [
+    "tpr_privilegiado",
+    "tpr_desprivilegiado",
+    "fpr_privilegiado",
+    "fpr_desprivilegiado",
+    "positive_rate_privilegiado",
+    "positive_rate_desprivilegiado"
+  ],
+  "linhas_ignorar_negrito": [
+    "nulo",
+    "base"
+  ]
+}

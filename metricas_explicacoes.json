@@ -1,0 +1,147 @@
+{
+    "avaliar_tradicional": {
+
+        "accuracy": {
+            "nome": "Accuracy",
+            "descricao": "Proporção de previsões corretas em relação ao total de exemplos avaliados.",
+            "interpretacao": {
+                "objetivo": "maximizar",
+                "ideal": 1.0,
+                "faixa_boa": ">= 0.80",
+                "observacao": "Pode ser enganosa em conjuntos de dados desbalanceados."
+            }
+        },
+
+        "precision": {
+            "nome": "Precision",
+            "descricao": "Entre os exemplos classificados como positivos pelo modelo, indica a proporção que realmente pertence à classe positiva.",
+            "interpretacao": {
+                "objetivo": "maximizar",
+                "ideal": 1.0,
+                "faixa_boa": ">= 0.80",
+                "observacao": "Valores altos indicam poucos falsos positivos."
+            }
+        },
+
+        "recall": {
+            "nome": "Recall",
+            "descricao": "Entre os exemplos realmente positivos, indica a proporção corretamente identificada pelo modelo.",
+            "interpretacao": {
+                "objetivo": "maximizar",
+                "ideal": 1.0,
+                "faixa_boa": ">= 0.80",
+                "observacao": "Valores altos indicam poucos falsos negativos."
+            }
+        },
+
+        "f1": {
+            "nome": "F1-Score",
+            "descricao": "Média harmônica entre precisão e recall.",
+            "interpretacao": {
+                "objetivo": "maximizar",
+                "ideal": 1.0,
+                "faixa_boa": ">= 0.80",
+                "observacao": "É uma métrica de equilíbrio entre precisão e recall."
+            }
+        }
+    },
+
+    "avaliar_fairness": {
+
+        "equal_opportunity": {
+            "nome": "Equal Opportunity Difference",
+            "descricao": "Diferença absoluta entre as taxas de verdadeiros positivos dos grupos.",
+            "interpretacao": {
+                "objetivo": "minimizar",
+                "ideal": 0.0,
+                "faixa_boa": "<= 0.05",
+                "faixa_aceitavel": "<= 0.10",
+                "observacao": "Quanto menor o valor, mais semelhantes são as oportunidades dos grupos."
+            }
+        },
+
+        "equalized_odds": {
+            "nome": "Equalized Odds Difference",
+            "descricao": "Diferença combinada entre TPR e FPR dos grupos.",
+            "interpretacao": {
+                "objetivo": "minimizar",
+                "ideal": 0.0,
+                "faixa_boa": "<= 0.05",
+                "faixa_aceitavel": "<= 0.10",
+                "observacao": "Quanto menor o valor, mais semelhante é o comportamento do modelo entre os grupos."
+            }
+        },
+
+        "demographic_parity": {
+            "nome": "Demographic Parity Difference",
+            "descricao": "Diferença absoluta entre as taxas de classificação positiva dos grupos.",
+            "interpretacao": {
+                "objetivo": "minimizar",
+                "ideal": 0.0,
+                "faixa_boa": "<= 0.05",
+                "faixa_aceitavel": "<= 0.10",
+                "observacao": "Valores próximos de zero indicam distribuição semelhante de resultados positivos."
+            }
+        },
+
+        "tpr_privilegiado": {
+            "nome": "True Positive Rate - Privileged Group",
+            "descricao": "Taxa de verdadeiros positivos do grupo privilegiado.",
+            "interpretacao": {
+                "objetivo": "maximizar",
+                "ideal": 1.0,
+                "observacao": "Utilizada principalmente para comparação entre grupos."
+            }
+        },
+
+        "tpr_desprivilegiado": {
+            "nome": "True Positive Rate - Unprivileged Group",
+            "descricao": "Taxa de verdadeiros positivos do grupo desprivilegiado.",
+            "interpretacao": {
+                "objetivo": "maximizar",
+                "ideal": 1.0,
+                "observacao": "Utilizada principalmente para comparação entre grupos."
+            }
+        },
+
+        "fpr_privilegiado": {
+            "nome": "False Positive Rate - Privileged Group",
+            "descricao": "Taxa de falsos positivos do grupo privilegiado.",
+            "interpretacao": {
+                "objetivo": "minimizar",
+                "ideal": 0.0,
+                "observacao": "Valores menores indicam menos classificações incorretas positivas."
+            }
+        },
+
+        "fpr_desprivilegiado": {
+            "nome": "False Positive Rate - Unprivileged Group",
+            "descricao": "Taxa de falsos positivos do grupo desprivilegiado.",
+            "interpretacao": {
+                "objetivo": "minimizar",
+                "ideal": 0.0,
+                "observacao": "Valores menores indicam menos classificações incorretas positivas."
+            }
+        },
+
+        "positive_rate_privilegiado": {
+            "nome": "Positive Prediction Rate - Privileged Group",
+            "descricao": "Proporção de exemplos classificados como positivos no grupo privilegiado.",
+            "interpretacao": {
+                "objetivo": "comparar",
+                "ideal": "próximo ao grupo desprivilegiado",
+                "observacao": "Utilizada para cálculo de Demographic Parity."
+            }
+        },
+
+        "positive_rate_desprivilegiado": {
+            "nome": "Positive Prediction Rate - Unprivileged Group",
+            "descricao": "Proporção de exemplos classificados como positivos no grupo desprivilegiado.",
+            "interpretacao": {
+                "objetivo": "comparar",
+                "ideal": "próximo ao grupo privilegiado",
+                "observacao": "Utilizada para cálculo de Demographic Parity."
+            }
+        }
+    }
+}
