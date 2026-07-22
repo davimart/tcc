@@ -1,0 +1,23 @@
+{
+    "python.analysis.exclude": [
+        "**/datasets/**",
+        "**/resultados/**",
+        "**/modelos/**",
+        "**/splits/**",
+        "**/__pycache__/**",
+        "**/.git/**"
+    ],
+    "files.watcherExclude": {
+        "**/datasets/**": true,
+        "**/resultados/**": true,
+        "**/modelos/**": true,
+        "**/splits/**": true,
+        "**/.git/**": true
+    },
+    "search.exclude": {
+        "**/datasets/**": true,
+        "**/resultados/**": true,
+        "**/modelos/**": true,
+        "**/splits/**": true
+    }
+}

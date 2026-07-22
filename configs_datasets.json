@@ -9,14 +9,8 @@
                 "grupo_privilegiado": 0,
                 "grupo_desprivilegiado": 1,
                 "lambda_fagtb": 0.3
-            },
-            {
-                "nome": "caucasian_1",
-                "atributo_sensivel": "Caucasian",
-                "grupo_privilegiado": 1,
-                "grupo_desprivilegiado": 0,
-                "lambda_fagtb": 0.3
             }
+
         ]
     },
 
@@ -29,15 +23,8 @@
                 "atributo_sensivel": "Applicant_African-American",
                 "grupo_privilegiado": 0,
                 "grupo_desprivilegiado": 1,
-                "lambda_fagtb": 0.001
-            },
-            {
-                "nome": "caucasian_1",
-                "atributo_sensivel": "Applicant_Caucasian",
-                "grupo_privilegiado": 1,
-                "grupo_desprivilegiado": 0,
-                "lambda_fagtb": 0.001
-            }
+                "lambda_fagtb": 0.01
+            }           
         ]
     }
 }

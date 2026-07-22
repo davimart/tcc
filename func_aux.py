@@ -82,6 +82,42 @@ def avaliar_tradicional(modelo, X_test, y_test, atributo_sensivel=None):
         "f1": f1_score(y_test, y_pred, zero_division=0),
     }
 
+def avaliar_tradicional_regressor(
+    modelo,
+    X_test,
+    y_test
+):
+    import numpy as np
+
+    from sklearn.metrics import (
+        r2_score,
+        mean_absolute_error,
+        mean_squared_error
+    )
+
+    y_pred = modelo.predict(X_test)
+
+    mse = mean_squared_error(
+        y_test,
+        y_pred
+    )
+
+    return {
+        "r2": r2_score(
+            y_test,
+            y_pred
+        ),
+
+        "mae": mean_absolute_error(
+            y_test,
+            y_pred
+        ),
+
+        "mse": mse,
+
+        "rmse": np.sqrt(mse)
+    }
+
 from fairlearn.postprocessing import ThresholdOptimizer
 
 def avaliar_fairness(
@@ -144,10 +180,10 @@ def avaliar_fairness(
 
     return {
         "equal_opportunity": abs(tpr_priv - tpr_despriv),
-        "equalized_odds": 0.5 * (
-            abs(tpr_priv - tpr_despriv)
-            + abs(fpr_priv - fpr_despriv)
-        ),
+        "equalized_odds": max(
+                abs(tpr_priv - tpr_despriv),
+                abs(fpr_priv - fpr_despriv)
+            ),
         "demographic_parity": abs(pr_priv - pr_despriv),
 
         "tpr_privilegiado": tpr_priv,
@@ -1953,7 +1989,7 @@ def explicar_pesos_fairshap(
     pesos_fairshap = pd.Series(pesos_fairshap).reset_index(drop=True)
 
     df_aux = X_train.copy()
-    df_aux["target"] = y_train
+    df_aux["alvo"] = y_train
     df_aux["peso_fairshap"] = pesos_fairshap
 
     figuras = {}
@@ -1966,15 +2002,15 @@ def explicar_pesos_fairshap(
     ax.set_ylabel("Frequência")
     figuras["distribuicao_pesos"] = fig
 
-    # 2. Boxplot por grupo sensível e target
+    # 2. Boxplot por grupo sensível e alvo
     fig, ax = plt.subplots(figsize=(9, 4))
     df_aux.boxplot(
         column="peso_fairshap",
-        by=[atributo_sensivel, "target"],
+        by=[atributo_sensivel, "alvo"],
         ax=ax
     )
-    ax.set_title(f"{nome_dataset} — Pesos por grupo sensível e target")
-    ax.set_xlabel(f"{atributo_sensivel}, target")
+    ax.set_title(f"{nome_dataset} — Pesos por grupo sensível e alvo")
+    ax.set_xlabel(f"{atributo_sensivel}, alvo")
     ax.set_ylabel("Peso FairShap")
     fig.suptitle("")
     figuras["boxplot_sensivel_target"] = fig
@@ -1984,6 +2020,8 @@ def explicar_pesos_fairshap(
         max_depth=max_depth_arvore,
         random_state=42
     )
+
+    X_train = df_aux.drop(columns=["peso_fairshap"])
 
     arvore.fit(X_train, pesos_fairshap)
 
@@ -2193,28 +2231,32 @@ def modelo_fagtb(
     X_train,
     y_train,
     sensitive_train,
-    X_test=None,
-    y_test=None,
-    sensitive_test=None,
+    X_test,
+    y_test,
+    sensitive_test,
+    lambda_fagtb,
     n_estimators=200,
-    learning_rate=0.01,
+    learning_rate=0.1,
     max_depth=3,
     max_features=None,
-    lambda_fagtb=0.05
+    min_samples_split=2,
+    min_impurity=0,
+    regression=False
 ):
     import importlib
     import fagtb_core
+
     importlib.reload(fagtb_core)
     from fagtb_core import FAGTB
 
     modelo = FAGTB(
         n_estimators=n_estimators,
         learning_rate=learning_rate,
-        min_samples_split=2,
-        min_impurity=0,
+        min_samples_split=min_samples_split,
+        min_impurity=min_impurity,
         max_depth=max_depth,
         max_features=max_features,
-        regression=False
+        regression=regression
     )
 
     modelo.fit(
@@ -2222,9 +2264,9 @@ def modelo_fagtb(
         y_train,
         sensitive_train,
         LAMBDA=lambda_fagtb,
-        Xtest=X_test if X_test is not None else X_train,
-        yt=y_test if y_test is not None else y_train,
-        sensitivet=sensitive_test if sensitive_test is not None else sensitive_train
+        Xtest=X_test,
+        yt=y_test,
+        sensitivet=sensitive_test
     )
 
     return modelo
