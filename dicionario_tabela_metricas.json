@@ -11,15 +11,14 @@
     "equal_opportunity": "EOp",
     "equalized_odds": "EOdds",
     "demographic_parity": "DP",
-    "tpr_privilegiado": "TPR|P=1",
-    "tpr_desprivilegiado": "TPR|P=0",
-    "fpr_privilegiado": "FPR|P=1",
-    "fpr_desprivilegiado": "FPR|P=0",
-    "positive_rate_privilegiado": "PR|P=1",
-    "positive_rate_desprivilegiado": "PR|P=0",
-    "actual_rate_privilegiado": "AR|P=1",
-    "actual_rate_desprivilegiado": "AR|P=0"
-
+    "tpr_privilegiado": "TPR|P=0",
+    "tpr_desprivilegiado": "TPR|P=1",
+    "fpr_privilegiado": "FPR|P=0",
+    "fpr_desprivilegiado": "FPR|P=1",
+    "positive_rate_privilegiado": "PR|P=0",
+    "positive_rate_desprivilegiado": "PR|P=1",
+    "actual_rate_privilegiado": "AR|P=0",
+    "actual_rate_desprivilegiado": "AR|P=1"
   },
   "modelos": {
     "nulo": "Nulo",
@@ -35,8 +34,7 @@
     "threshold": "Threshold"
   },
   "configs_sensiveis": {
-    "african_american_0": "Preto|P=0",
-    "caucasian_1": "Branco|P=1"
+    "african_american_0": "Preto|P=0"
   },
   "datasets": {
     "compas": "COMPAS",
@@ -66,7 +64,9 @@
     "fpr_privilegiado",
     "fpr_desprivilegiado",
     "positive_rate_privilegiado",
-    "positive_rate_desprivilegiado"
+    "positive_rate_desprivilegiado",
+    "actual_rate_privilegiado",
+    "actual_rate_desprivilegiado"
   ],
   "linhas_ignorar_negrito": [
     "nulo",
